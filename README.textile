@@ -1,10 +1,10 @@
 h1. Android Rindirect
 
-{{Android Rindirect}} is a small tools to improve the code reuse in Android application. The idea is to allow an application to reuse components (Activities, Services...) from another application without duplicating / editing the code from the reused components.
+@Android Rindirect@ is a small tools to improve the code reuse in Android application. The idea is to allow an application to reuse components (Activities, Services...) from another application without duplicating / editing the code from the reused components.
 
 h1. Motivations
 
-Let's take an application A containing an activity MyActivity.java. This application declares the package {{foo.a}}, and so, the build generates a {{foo.a.R.java}} file. Our activity depends on this R file to access resources. 
+Let's take an application A containing an activity MyActivity.java. This application declares the package @foo.a@, and so, the build generates a @foo.a.R.java@ file. Our activity depends on this R file to access resources. 
 
 ```java
 public class MyActivity extends Activity {
@@ -14,13 +14,12 @@ public class MyActivity extends Activity {
         setContentView(R.layout.main);
     }
 }
-````
-
-Imagine now, we need to create an extended version of A called ... B. B is an application reusing components from A, and especially MyActivity. B cannot have the same package name, because Android identifies applications from their package name. So B's package will be {{foo.b}}. So, our build process generates the {{foo.b.R.java}} file. This is perfectly fine for activities developed in the B context, because they will use this file, but how to reuse activities from A. Indeed, those activities depend on {{foo.a.R.java}} not {{foo.b.R.java}}. 
+```
+Imagine now, we need to create an extended version of A called ... B. B is an application reusing components from A, and especially MyActivity. B cannot have the same package name, because Android identifies applications from their package name. So B's package will be @foo.b@. So, our build process generates the @foo.b.R.java@ file. This is perfectly fine for activities developed in the B context, because they will use this file, but how to reuse activities from A. Indeed, those activities depend on @foo.a.R.java@ not @foo.b.R.java@. 
 
 * Copying the first R file *DO NOT WORK*
 * Copying all our components source code and editing the imports to use the correct R class requires too many manually edits, does not allow to profit from A improvements into B, this paves the road to tricky and painful merges.
-* Generating a {{foo.a.R.java}} file delegating on {{foo.b.r.java}} : it's the rindirect way
+* Generating a @foo.a.R.java@ file delegating on @foo.b.r.java@ : it's the rindirect way
 
 h1. Overview
 
@@ -43,4 +42,4 @@ The only small price is to generates those missing R files for each _imported_ p
 
 h1. Documentation
 
-The rindirect documentation is on the [wiki|http://github.com/akquinet/android-rindirect/wiki/Home/].
+The rindirect documentation is on the [[wiki|http://github.com/akquinet/android-rindirect/wiki/Home/]].
