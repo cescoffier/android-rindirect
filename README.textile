@@ -6,7 +6,7 @@ h1. Motivations
 
 Let's take an application A containing an activity MyActivity.java. This application declares the package _foo.a_, and so, the build generates a _foo.a.R.java_ file. Our activity depends on this R file to access resources. 
 
-<code>
+<pre>
 public class MyActivity extends Activity {
   public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -14,7 +14,7 @@ public class MyActivity extends Activity {
         setContentView(R.layout.main);
     }
 }
-</code>
+</pre>
 
 Imagine now, we need to create an extended version of A called ... B. B is an application reusing components from A, and especially MyActivity. B cannot have the same package name, because Android identifies applications from their package name. So B's package will be _foo.b_. So, our build process generates the _foo.b.R.java_ file. This is perfectly fine for activities developed in the B context, because they will use this file, but how to reuse activities from A. Indeed, those activities depend on _foo.a.R.java_ not _foo.b.R.java_. 
 
