@@ -33,6 +33,7 @@ Rindirect provides
 * a maven plugin
 
 h1. Advantages
+
 * You don't have to duplicate / edit your components
 * You can still improve your 'root' application, branded versions and extension will automatically profits from your improvements
 * If a resource is missing in B, you will immediately see a compilation error
