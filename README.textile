@@ -1,0 +1,45 @@
+h1. Android Rindirect
+
+{{Android Rindirect}} is a small tools to improve the code reuse in Android application. The idea is to allow an application to reuse components (Activities, Services...) from another application without duplicating / editing the code from the reused components.
+
+h1. Motivations
+
+Let's take an application A containing an activity MyActivity.java. This application declares the package {{foo.a}}, and so, the build generates a {{foo.a.R.java}} file. Our activity depends on this R file to access resources. 
+
+```java
+public class MyActivity extends Activity {
+  public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Use foo.R
+        setContentView(R.layout.main);
+    }
+}
+````
+
+Imagine now, we need to create an extended version of A called ... B. B is an application reusing components from A, and especially MyActivity. B cannot have the same package name, because Android identifies applications from their package name. So B's package will be {{foo.b}}. So, our build process generates the {{foo.b.R.java}} file. This is perfectly fine for activities developed in the B context, because they will use this file, but how to reuse activities from A. Indeed, those activities depend on {{foo.a.R.java}} not {{foo.b.R.java}}. 
+
+* Copying the first R file *DO NOT WORK*
+* Copying all our components source code and editing the imports to use the correct R class requires too many manually edits, does not allow to profit from A improvements into B, this paves the road to tricky and painful merges.
+* Generating a {{foo.a.R.java}} file delegating on {{foo.b.r.java}} : it's the rindirect way
+
+h1. Overview
+
+When building B, you will copy the sources from A to B (either using maven apk-sources artifact, or Android ADT libraries). Those imported classes won't compile directly because of the missing R. So rindirect generates a R file for classes coming from A delegating to B's R class. 
+
+Then, you can compile the complete project and obviously run it.
+
+Rindirect provides
+* a command line tools
+* a maven plugin
+
+h1. Advantages
+* You don't have to duplicate / edit your components
+* You can still improve your 'root' application, branded versions and extension will automatically profits from your improvements
+* If a resource is missing in B, you will immediately see a compilation error
+* This is completely non-intrusive in the code. You still develop using R references.
+
+The only small price is to generates those missing R files for each _imported_ projects. 
+
+h1. Documentation
+
+The rindirect documentation is on the [wiki|http://github.com/akquinet/android-rindirect/wiki/Home/].
