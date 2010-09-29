@@ -27,7 +27,7 @@
     <version>5</version>
   </parent>
 
-  <name>rindirect</name>
+  <name>android-rindirect-project</name>
 
   <description>Rindirect generates a missing R files to improve code
     reuse in Android</description>
@@ -130,6 +130,12 @@
     </plugins>
   </build>
 
+  <scm>
+    <connection>scm:git:git@github.com:akquinet/android-rindirect.git</connection>
+    <url>git@github.com:akquinet/android-rindirect.git</url>
+    <developerConnection>scm:git:git@github.com:akquinet/android-rindirect.git</developerConnection>
+  </scm>
+
   <profiles>
     <profile>
       <id>ats.nexus</id>
@@ -149,17 +155,26 @@
         </snapshotRepository>
       </distributionManagement>
     </profile>
-  </profiles>
 
-  <scm>
-    <connection>
-    scm:svn:https://www.spree.de/svn-repository/go-mobile/android/android-utils/trunk/rindirect
-    </connection>
-    <developerConnection>
-    scm:svn:https://www.spree.de/svn-repository/go-mobile/android/android-utils/trunk/rindirect
-    </developerConnection>
-    <url>
-    https://www.spree.de/svn-repository/go-mobile/android/android-utils/trunk/rindirect
-    </url>
-  </scm>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
