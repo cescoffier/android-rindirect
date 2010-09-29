@@ -43,4 +43,4 @@ The only small price is to generates those missing R files for each _imported_ p
 
 h1. Documentation
 
-The rindirect documentation is on the [[wiki|http://github.com/akquinet/android-rindirect/wiki/Home/]].
+The rindirect documentation is on the <a href="http://github.com/akquinet/android-rindirect/wiki/Home/">wiki</a>.
