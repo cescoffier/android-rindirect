@@ -15,6 +15,7 @@ public class MyActivity extends Activity {
     }
 }
 ```
+
 Imagine now, we need to create an extended version of A called ... B. B is an application reusing components from A, and especially MyActivity. B cannot have the same package name, because Android identifies applications from their package name. So B's package will be @foo.b@. So, our build process generates the @foo.b.R.java@ file. This is perfectly fine for activities developed in the B context, because they will use this file, but how to reuse activities from A. Indeed, those activities depend on @foo.a.R.java@ not @foo.b.R.java@. 
 
 * Copying the first R file *DO NOT WORK*
